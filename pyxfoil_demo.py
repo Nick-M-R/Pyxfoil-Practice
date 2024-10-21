@@ -46,7 +46,7 @@ alfs = [0, 10]#Angles of Attack to simulated
 #Run Xfoil,
     #save geometry, surface pressures, and polar (Cl vs alpha)
     #change quiet to 'False' to see raw Xfoil output
-print("Running XFOIL/pyxfoil and saving data in 'Data/naca0012' folder...\n")
+print("Running XFOIL/pyxfoil and saving data in 'data/naca0012' folder...\n")
 pyxfoil.GetPolar(foil, naca, alfs, Re, SaveCP=True, quiet=True)
 # print('Xfoil run complete')
 # input("Press any key to continue...")
@@ -56,7 +56,7 @@ pyxfoil.GetPolar(foil, naca, alfs, Re, SaveCP=True, quiet=True)
 
 #read airfoil geometry data from file
     #(this file was created by the above 'pyxfoil.GetPolar' call)
-geom = pyxfoil.ReadXfoilAirfoilGeom('Data/naca0012/naca0012.dat')
+geom = pyxfoil.ReadXfoilAirfoilGeom('data/naca0012/naca0012.dat')
 #Plot airfoil geometry
     #(NOTE: You must plot airfoil geometry from EQUATION, not file, for points in PJ1)
 print('\nPlotting airfoil geometry from file saved by XFOIL/pyxfoil')
@@ -69,7 +69,7 @@ plt.ylabel('z/c')
 plt.show()
 
 #Read and print polar data
-polar = pyxfoil.ReadXfoilPolar('Data/naca0012/naca0012_polar_Re0.00e+00a0.0-10.0.dat')
+polar = pyxfoil.ReadXfoilPolar('data/naca0012/naca0012_polar_Re0.00e+00a0.0-10.0.dat')
 print('\nPolar from file saved by XFOIL/pyxfoil:')
 print(polar)
 
@@ -85,7 +85,7 @@ print('------------------------------------------------------------------\n\n')
 #will be loaded from file, rather than specified by NACA number
 
 #Inputs
-foil = 'Data/naca0012/naca0012.dat' #path to airfoil geometry file
+foil = 'data/naca0012/naca0012.dat' #path to airfoil geometry file
 naca = False      #'False' option loads geometry from file path, not equation
 Re   = 5e8        #Reynolds Number (viscous effects calculated)
 alfs = [0, 5, 10] #Angles of Attack to simulate
@@ -96,11 +96,11 @@ pyxfoil.GetPolar(foil, naca, alfs, Re, SaveCP=True, quiet=True)
 
 print("There are now two different polar files in the save directory:")
 import glob
-[print('    {}: {}'.format(i+1, g)) for i, g in enumerate(glob.glob("Data/naca0012/*polar*.dat"))]
+[print('    {}: {}'.format(i+1, g)) for i, g in enumerate(glob.glob("data/naca0012/*polar*.dat"))]
 print('The first is the inviscid polar from our first XFOIL run')
 print('The second is the viscous polar from our latest XFOIL run')
 
-viscpolar = pyxfoil.ReadXfoilPolar('Data/naca0012/naca0012_polar_Re5.00e+08a0.0-10.0.dat')
+viscpolar = pyxfoil.ReadXfoilPolar('data/naca0012/naca0012_polar_Re5.00e+08a0.0-10.0.dat')
 print('\nViscous polar from file saved by XFOIL/pyxfoil the second time:')
 print(viscpolar)
 
