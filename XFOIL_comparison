@@ -17,6 +17,9 @@ import mses
 # Study Cases
 
 # Eppler 387
+
+eppler_path = 'data/Eppler 387/Eppler 387.dat'
+
     # Drag Polar
     # Re = [2e5, 1e5, 6e4]
 
@@ -25,15 +28,29 @@ import mses
     # Re = 1e5
     # Alfa = 3.742
 
+eppler_Ma = 0
+eppler_Re = 1e5
+eppler_alfa = 3.742
+
 # FX67-K-170
+
+fx_path = 'data/FX-67-K-170/FX67-K-170.dat'
+
     # Cp Distribution
     # Ma = 0
     # Re = 2e5
     # Alfa = 4.156
 
+fx_Ma = 0
+fx_Re = 2e5
+fx_alfa = 4.156
+
     # Error Convergence as a function of Panels
 
 # RAE 2822
+
+rae_path = 'data/RAE 2822/RAE 2822.dat'
+
     # Cp Distribution 
     # Ma = 0.676
     # Re = 5.7e6
@@ -44,7 +61,14 @@ import mses
     # Re = 6.2e6
     # Alfa = 2.734
 
+rae_Ma = [0.676, 0.75]
+rae_Re = [5.7e6, 6.2e6]
+rae_alfa = [2.165, 2.734]
+
 # LNV109A
+
+lnv_path = 'data/LNV109A/LNV109A.dat'
+
     # Drag Polar
     # Re = [2.5e5, 3.75e5, 5e5, 6.5e5]
     
@@ -58,7 +82,14 @@ import mses
     # Re = 3.75e5
     # Alfa = 3.459
 
+lnv_Ma = 0.1
+lnv_Re = [2.5e5, 3.75e5, 5e5, 6.5e5]
+lnv_alfa = [7.358, 3.459]
+
 # LA203A
+
+la_path = 'data/LA203A/LA203A.dat'
+
     # Drag Polar
     # Re = [2.5e5, 3.75e5, 5e5]
 
@@ -66,3 +97,7 @@ import mses
     # Ma = 0.1
     # Re = 2.5e5
     # Alfa = 3.28
+
+la_Ma = 0.1
+la_Re = [2.5e5, 3.75e5, 5e5]
+la_alfa = 3.28

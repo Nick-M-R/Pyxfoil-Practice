@@ -116,7 +116,7 @@ def ErrorMessage(text):
 ########################################################################
 
 class Xfoil:
-    def __init__(self, foil='0012', naca=True, Re=0, Iter=100,
+    def __init__(self, foil='0012', naca=True, Ma=0, Re=0, Iter=100,
         xfoilpath=None, headless=True):
         """Initialize class for specific airfoil.
         foil --> airfoil name, either NACA digits or path to geometry file
@@ -154,6 +154,8 @@ class Xfoil:
 
 
         #SAVE RUN PARAMETERS
+        #Mach number
+        self.Ma = Ma
         #Reynolds number
         self.Re = Re
         #Maximum iteration
@@ -245,9 +247,12 @@ class Xfoil:
         """
         #ENTER OPERATIONS MENU
         self.AddInput('oper')
+        if self.Ma != 0:
+            #VISCOULS SIMULATION WITH GIVEN MACH NUMBER
+            self.AddInput('m {}'.format( self.Ma ) )
         if self.Re != 0:
             #VISCOULS SIMULATION WITH GIVEN REYNOLDS NUMBER
-            self.AddInput('visc {}'.format( self.Re ) )
+            self.AddInput('v {}'.format( self.Re ) )
         #SET ITERATION NUMBER
         self.AddInput('iter {}'.format( self.Iter ))
 
@@ -331,8 +336,8 @@ class Xfoil:
         airfoil, Reynolds number, and angle of attack
         alf --> current angle of attack
         """
-        return '{}/{}_surfCP_Re{:1.2e}a{:1.1f}.dat'.format(
-                        self.savepath, self.name, self.Re, alf)
+        return '{}/{}_surfCP_Ma{:1.2e}Re{:1.2e}a{:1.1f}.dat'.format(
+                        self.savepath, self.name, self.Ma, self.Re, alf)
 
     def SaveNamePolar(self, alfs):
         """Make save filename for airfoil polar based on
@@ -348,8 +353,8 @@ class Xfoil:
         else:
             #use least and greatest angle of attack for name
             alfrange = 'a{:1.1f}-{:1.1f}'.format(alfs[0], alfs[-1])
-        return '{}/{}_polar_Re{:1.2e}{}.dat'.format(
-                        self.savepath, self.name, self.Re, alfrange)
+        return '{}/{}_polar_Ma{:1.2e}Re{:1.2e}{}.dat'.format(
+                        self.savepath, self.name, self.Ma, self.Re, alfrange)
 
 
 
@@ -408,7 +413,7 @@ def WriteXfoilFile(name, x, z):
 ### MAIN ###############################################################
 ########################################################################
 
-def GetPolar(foil='0012', naca=True, alfs=[0], Re=0,
+def GetPolar(foil='0012', naca=True, alfs=[0], Ma=0, Re=0,
                 SaveCP=True, Iter=100, pane=False,
                 overwrite=True, quiet=True):
     """For a single airfoil at a single Reynolds number,
@@ -423,7 +428,7 @@ def GetPolar(foil='0012', naca=True, alfs=[0], Re=0,
     quiet --> Supress XFOIL output
     """
     #INITIALIZE XFOIL OBJECT
-    obj = Xfoil(foil, naca, Re, Iter=Iter)
+    obj = Xfoil(foil, naca, Ma, Re, Iter=Iter)
     #GEOMETRY
     #condition panel geometry (use for rough shapes, not on smooth shapes)
     if pane:
@@ -442,7 +447,7 @@ def GetPolar(foil='0012', naca=True, alfs=[0], Re=0,
 
 
 
-def main(foil, naca, alfs, Re, Iter=30):
+def main(foil, naca, alfs, Ma, Re, Iter=30):
     """
     foil --> path to airfoil file or naca 4-digit number
     naca --> boolean if naca or not
@@ -451,7 +456,7 @@ def main(foil, naca, alfs, Re, Iter=30):
     Iter --> maximum number of iterations for each simulation
     """
 
-    obj = Xfoil(foil, naca, Re, Iter) #initialize xfoil
+    obj = Xfoil(foil, naca, Ma, Re, Iter) #initialize xfoil
     obj.SaveGeom() #save airfoil geometry
     obj.EnterOperMenu() #set up operations, reynolds, iteration number
     obj.SingleAlfa(alfs[0]) #command to run single alpha case
@@ -467,10 +472,11 @@ if __name__ == "__main__":
     foils = ['0012', 'Data/s1223.dat']
     nacas = [True, False]
     alfs = [0, 10]
+    Ma = 0.0
     Re = 2e5
 
     for foil, naca in zip(foils, nacas):
-        main(foil, naca, alfs, Re)
+        main(foil, naca, alfs, Ma, Re)
 
 
 
