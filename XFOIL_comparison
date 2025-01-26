@@ -8,3 +8,10 @@ from scipy.optimize import fsolve
 import pyxfoil
 import mses
 
+# Plot the experimental data form research papers
+    #[1] Drela, Mark. "XFOIL: An analysis and design system for low Reynolds number airfoils." Low Reynolds Number Aerodynamics: Proceedings of the Conference Notre Dame, Indiana, USA, 5–7 June 1989. Berlin, Heidelberg: Springer Berlin Heidelberg, 1989.
+    #[2] Drela, Mark. "Design and optimization method for multi-element airfoils." Aerospace Design Conference. 1993.
+    #[3] Drela, Mark, and Michael B. Giles. "Viscous-inviscid analysis of transonic and low Reynolds number airfoils." AIAA journal 25.10 (1987): 1347-1355.
+    #[4] Drela, Mark. "Pros & cons of airfoil optimization." Frontiers of Computational Fluid Dynamics 1998. 1998. 363-381.
+
+
