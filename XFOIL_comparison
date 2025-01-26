@@ -14,4 +14,55 @@ import mses
     #[3] Drela, Mark, and Michael B. Giles. "Viscous-inviscid analysis of transonic and low Reynolds number airfoils." AIAA journal 25.10 (1987): 1347-1355.
     #[4] Drela, Mark. "Pros & cons of airfoil optimization." Frontiers of Computational Fluid Dynamics 1998. 1998. 363-381.
 
+# Study Cases
 
+# Eppler 387
+    # Drag Polar
+    # Re = [2e5, 1e5, 6e4]
+
+    # Cp Distribution 
+    # Ma = 0
+    # Re = 1e5
+    # Alfa = 3.742
+
+# FX67-K-170
+    # Cp Distribution
+    # Ma = 0
+    # Re = 2e5
+    # Alfa = 4.156
+
+    # Error Convergence as a function of Panels
+
+# RAE 2822
+    # Cp Distribution 
+    # Ma = 0.676
+    # Re = 5.7e6
+    # Alfa = 2.165
+
+    # Cp Distribution
+    # Ma = 0.75
+    # Re = 6.2e6
+    # Alfa = 2.734
+
+# LNV109A
+    # Drag Polar
+    # Re = [2.5e5, 3.75e5, 5e5, 6.5e5]
+    
+    # Cp Distribution
+    # Ma = 0.1
+    # Re = 5e5
+    # Alfa = 7.358
+
+    # Cp Distribution
+    # Ma = 0.1
+    # Re = 3.75e5
+    # Alfa = 3.459
+
+# LA203A
+    # Drag Polar
+    # Re = [2.5e5, 3.75e5, 5e5]
+
+    # Cp Distribution
+    # Ma = 0.1
+    # Re = 2.5e5
+    # Alfa = 3.28
