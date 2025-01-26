@@ -1,0 +1,10 @@
+### Section 2.0: PYXFOIL Practice
+#STANDARD IMPORTS
+import numpy as np
+import os
+import matplotlib.pyplot as plt
+import pandas as pd
+from scipy.optimize import fsolve
+import pyxfoil
+import mses
+
