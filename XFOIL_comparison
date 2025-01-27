@@ -29,8 +29,15 @@ eppler_path = 'data/Eppler 387/Eppler 387.dat'
     # Alfa = 3.742
 
 eppler_Ma = 0
-eppler_Re = 1e5
+eppler_Re = [2e5, 1e5, 6e4]
 eppler_alfa = 3.742
+
+# Creating Polar and Surface CP Files
+
+#pyxfoil.GetPolar(foil=eppler_path, naca=False, alfs=eppler_alfa, Ma=eppler_Ma,Re=eppler_Re)
+pyxfoil.main(foil=eppler_path, naca=False, alfs=eppler_alfa, Ma=eppler_Ma,Re=eppler_Re)
+
+
 
 # FX67-K-170
 
@@ -101,3 +108,4 @@ la_path = 'data/LA203A/LA203A.dat'
 la_Ma = 0.1
 la_Re = [2.5e5, 3.75e5, 5e5]
 la_alfa = 3.28
+

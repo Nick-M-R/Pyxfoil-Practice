@@ -121,6 +121,7 @@ class Xfoil:
         """Initialize class for specific airfoil.
         foil --> airfoil name, either NACA digits or path to geometry file
         naca --> True for naca digits, False for geometry file
+        Ma --> Ma number (incomp if zero)
         Re --> Reynolds number (inviscid if zero)
         Iter --> number of iterations per simulation (XFOIL default: 20)
         xfoilpath --> path to xfoil executable file
@@ -169,7 +170,7 @@ class Xfoil:
             #Load airfoil from file
             #airfoil name is between parent path and file extension
             parent = GetParentDir(foil)
-            self.name = FindBetween(foil, parent, '\.')
+            self.name = FindBetween(foil, parent, '/.')
         #CREATE SAVE DIRECTORY
             #Save in Data/airfoilname/
         self.savepath = 'Data/{}'.format(self.name)
@@ -421,6 +422,7 @@ def GetPolar(foil='0012', naca=True, alfs=[0], Ma=0, Re=0,
     foil --> naca digits or path to geom file
     naca --> True for naca digits, False for file path
     alfs --> list of alphas to run
+    Ma --> Mach number (default incomp)
     Re --> Reynolds number (default invisc)
     SaveCp --> save each individual pressure distribution
     pane --> smooth geometry before simulation (can cause instability)
@@ -433,6 +435,9 @@ def GetPolar(foil='0012', naca=True, alfs=[0], Ma=0, Re=0,
     #condition panel geometry (use for rough shapes, not on smooth shapes)
     if pane:
         obj.AddInput('pane')
+    if type(alfs) == float or type(alfs) == int:
+            #angle of attack input must be array-like
+            alfs = [alfs]
     #Save geometry for later slope calculations
     obj.SaveGeom()
     #RUN AND SAVE ALL POLAR CASES
@@ -452,6 +457,7 @@ def main(foil, naca, alfs, Ma, Re, Iter=30):
     foil --> path to airfoil file or naca 4-digit number
     naca --> boolean if naca or not
     alfs --> list of angle of attacks for airfoils (deg)
+    Ma --> Mach number to run
     Re --> Reynolds number to run
     Iter --> maximum number of iterations for each simulation
     """
@@ -459,6 +465,9 @@ def main(foil, naca, alfs, Ma, Re, Iter=30):
     obj = Xfoil(foil, naca, Ma, Re, Iter) #initialize xfoil
     obj.SaveGeom() #save airfoil geometry
     obj.EnterOperMenu() #set up operations, reynolds, iteration number
+    if type(alfs) == float or type(alfs) == int:
+            #angle of attack input must be array-like
+            alfs = [alfs]
     obj.SingleAlfa(alfs[0]) #command to run single alpha case
     obj.Polar(alfs) #Command to run polar case
     obj.Quit() #command to quit XFOIL when done
