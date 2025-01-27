@@ -435,9 +435,6 @@ def GetPolar(foil='0012', naca=True, alfs=[0], Ma=0, Re=0,
     #condition panel geometry (use for rough shapes, not on smooth shapes)
     if pane:
         obj.AddInput('pane')
-    if type(alfs) == float or type(alfs) == int:
-            #angle of attack input must be array-like
-            alfs = [alfs]
     #Save geometry for later slope calculations
     obj.SaveGeom()
     #RUN AND SAVE ALL POLAR CASES
@@ -466,8 +463,8 @@ def main(foil, naca, alfs, Ma, Re, Iter=30):
     obj.SaveGeom() #save airfoil geometry
     obj.EnterOperMenu() #set up operations, reynolds, iteration number
     if type(alfs) == float or type(alfs) == int:
-            #angle of attack input must be array-like
-            alfs = [alfs]
+        #angle of attack input must be array-like
+        alfs = [alfs]
     obj.SingleAlfa(alfs[0]) #command to run single alpha case
     obj.Polar(alfs) #Command to run polar case
     obj.Quit() #command to quit XFOIL when done
